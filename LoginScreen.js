@@ -30,6 +30,7 @@ export default function LoginScreen({ navigation }) {
 
       await AsyncStorage.setItem("id_utilisateur", data.id_utilisateur.toString());
 
+      navigation.navigate("Reservations"); 
 
     } catch (err) {
       Alert.alert("Erreur", "Problème de connexion.");
@@ -57,7 +58,7 @@ export default function LoginScreen({ navigation }) {
         value={motDePasse}
         onChangeText={setMotDePasse}
       />
-
+      
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>SE CONNECTER</Text>
       </TouchableOpacity>
