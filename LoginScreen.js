@@ -16,7 +16,7 @@ export default function LoginScreen({ navigation }) {
 
     try {
 
-      const res = await fetch(`http://213.156.132.144:3033/connexion`, {
+      const res = await fetch(`http://192.168.1.199:3033/auth/connexion`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, mot_de_passe: motDePasse }),

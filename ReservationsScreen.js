@@ -28,7 +28,7 @@ export default function ReservationsScreen() {
 
             try {
                 const res = await fetch(
-                    `http://213.156.132.144:3033/mes-reservations/${idUtilisateur}`
+                    `http://192.168.1.199:3033/reservations/mes-reservations/${idUtilisateur}`
                 );
 
 
