@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 export default function LoginScreen({ navigation }) {
     // suivre changement champs de mail et ausi champ mot de passe
   const [email, setEmail] = useState('');
@@ -18,17 +19,22 @@ export default function LoginScreen({ navigation }) {
 
       const res = await fetch(`http://192.168.1.199:3033/auth/connexion`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json" },
         body: JSON.stringify({ email, mot_de_passe: motDePasse }),
       });
 
       const data = await res.json();
+      console.log("REPONSE RESERVATION :", data);
       if (!res.ok) {
         Alert.alert("Erreur", "Identifiants incorrects.");
         return;
       }
 
       await AsyncStorage.setItem("id_utilisateur", data.id_utilisateur.toString());
+      await AsyncStorage.setItem("token", data.token);
+
+     
 
       navigation.navigate("Reservations"); 
 

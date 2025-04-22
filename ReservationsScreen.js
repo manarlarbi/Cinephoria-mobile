@@ -22,13 +22,20 @@ export default function ReservationsScreen() {
     useEffect(() => {
         const fetchReservations = async () => {
             const idUtilisateur = await AsyncStorage.getItem("id_utilisateur");
-            if (!idUtilisateur) {
+            const token = await AsyncStorage.getItem("token");
+            if (!idUtilisateur || !token) {
                 return;
             }
 
             try {
                 const res = await fetch(
-                    `http://192.168.1.199:3033/reservations/mes-reservations/${idUtilisateur}`
+                    `http://192.168.1.199:3033/reservations/mes-reservations/${idUtilisateur}`,{
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+            
                 );
 
 
@@ -37,7 +44,8 @@ export default function ReservationsScreen() {
 
 
                 const data = await res.json();
-                setReservations(data);
+                console.log("les reservations data :",data);
+             setReservations(data);
 
             } catch (err) {
                 console.log(err);
